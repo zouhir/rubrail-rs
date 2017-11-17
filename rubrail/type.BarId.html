@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `BarId` type in crate `rubrail`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, BarId">
+
+    <title>rubrail::BarId - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc type">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Type Definition BarId</p><p class='location'><a href='index.html'>rubrail</a></p><script>window.sidebarCurrent = {name: 'BarId', ty: 'type', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Type Definition <a href='index.html'>rubrail</a>::<wbr><a class="type" href=''>BarId</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/rubrail/interface.rs.html#23' title='goto source code'>[src]</a></span></h1>
+<pre class='rust typedef'>type BarId = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>;</pre><div class='docblock'><p>Reference to a horizontal bar created by a <code>TTouchbar</code></p>
+
+<p>A <code>BarId</code> is returned any time a bar is created, where a bar is a horizontal
+view that can have smaller UI elements added to it, and can eventually be
+displayed on the Touch Bar hardware.</p>
+
+<p>The two types of bars are the <em>root bar</em>, which appears when you first open
+the Touch Bar by clicking on its icon in the Control Strip, and <em>popover
+bars</em>, which behave identically but are presented by clicking on buttons
+on a bar or popover.  Popovers provide the mechanism for recursive menus.</p>
+
+<h1 id='memory-allocation' class='section-header'><a href='#memory-allocation'>Memory Allocation</a></h1>
+<p>Memory is allocated for a bar when it is created, and is not released until
+the bar is made the root bar, or a popover of the root bar, <em>enabled</em>, <em>and
+subsequently replaced by another bar</em>.  That is, memory is deallocated
+recursively when an available Touch Bar menu is replaced.  If a menu is
+never registered as the active menu, then it will <em>never be deallocated</em>.
+<code>BarId</code> does <em>not</em> implement the Drop trait, and does <em>not</em> deallocate any
+memory when it falls out of scope.</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "rubrail";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
