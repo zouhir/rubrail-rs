@@ -10,8 +10,12 @@
     <title>rubrail::TScrubberData - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css"
+          id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../dark.css">
+    <link rel="stylesheet" type="text/css" href="../main.css" id="themeStyle">
+    <script src="../storage.js"></script>
     
 
     
@@ -28,10 +32,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Trait TScrubberData</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='index.html'>rubrail</a></p><script>window.sidebarCurrent = {name: 'TScrubberData', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Trait TScrubberData</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.count">count</a><a href="#tymethod.text">text</a><a href="#tymethod.width">width</a><a href="#tymethod.touch">touch</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='index.html'>rubrail</a></p><script>window.sidebarCurrent = {name: 'TScrubberData', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -55,17 +67,14 @@
 <div class='item-spacer'></div>    fn <a href='#tymethod.width' class='fnname'>width</a>(&amp;self, item: <a class="type" href="../rubrail/type.ItemId.html" title="type rubrail::ItemId">ItemId</a>, idx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>;
 <div class='item-spacer'></div>    fn <a href='#tymethod.touch' class='fnname'>touch</a>(&amp;self, item: <a class="type" href="../rubrail/type.ItemId.html" title="type rubrail::ItemId">ItemId</a>, idx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>);
 }</pre><div class='docblock'><p>The callback API for managing data in a Scrubber</p>
-
-<p>The Touch Bar supports a UI element called a &#39;scrubber&#39;, which is a
+<p>The Touch Bar supports a UI element called a 'scrubber', which is a
 horizontally scrolling widget filled with items which can be dynamically
 changed, and selected.  This is the primary interface for choosing from
 a list of (possibly dynamic) options.</p>
-
 <p>Since the contents of a scrubber are dynamic, the scrubber fills in its
 data on request through a series of callbacks.  A type that implements
 <code>TScrubberData</code> provides all of the callbacks that a scrubber needs to
 present its options.</p>
-
 <p>See the examples for usage.</p>
 </div>
             <h2 id='required-methods' class='small-section-header'>
@@ -73,28 +82,24 @@ present its options.</p>
             </h2>
             <div class='methods'>
         <h3 id='tymethod.count' class='method'><span id='count.v' class='invisible'><code>fn <a href='#tymethod.count' class='fnname'>count</a>(&amp;self, item: <a class="type" href="../rubrail/type.ItemId.html" title="type rubrail::ItemId">ItemId</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span></h3><div class='docblock'><p>Returns the number of items in the scrubber</p>
-
-<h1 id='arguments' class='section-header'><a href='#arguments'>Arguments</a></h1>
+<h1 id="arguments" class="section-header"><a href="#arguments">Arguments</a></h1>
 <ul>
 <li><code>item</code> - The <code>ItemId</code> of the interacting scrubber</li>
 </ul>
 </div><h3 id='tymethod.text' class='method'><span id='text.v' class='invisible'><code>fn <a href='#tymethod.text' class='fnname'>text</a>(&amp;self, item: <a class="type" href="../rubrail/type.ItemId.html" title="type rubrail::ItemId">ItemId</a>, idx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code></span></h3><div class='docblock'><p>Returns the text of the given index in the scrubber</p>
-
-<h1 id='arguments-1' class='section-header'><a href='#arguments-1'>Arguments</a></h1>
+<h1 id="arguments-1" class="section-header"><a href="#arguments-1">Arguments</a></h1>
 <ul>
 <li><code>item</code> - The <code>ItemId</code> of the interacting scrubber</li>
 <li><code>idx</code> - The index of the relevant item in the scrubber</li>
 </ul>
 </div><h3 id='tymethod.width' class='method'><span id='width.v' class='invisible'><code>fn <a href='#tymethod.width' class='fnname'>width</a>(&amp;self, item: <a class="type" href="../rubrail/type.ItemId.html" title="type rubrail::ItemId">ItemId</a>, idx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code></span></h3><div class='docblock'><p>Returns the width (in pixels) of the given index in the scrubber</p>
-
-<h1 id='arguments-2' class='section-header'><a href='#arguments-2'>Arguments</a></h1>
+<h1 id="arguments-2" class="section-header"><a href="#arguments-2">Arguments</a></h1>
 <ul>
 <li><code>item</code> - The <code>ItemId</code> of the interacting scrubber</li>
 <li><code>idx</code> - The index of the relevant item in the scrubber</li>
 </ul>
 </div><h3 id='tymethod.touch' class='method'><span id='touch.v' class='invisible'><code>fn <a href='#tymethod.touch' class='fnname'>touch</a>(&amp;self, item: <a class="type" href="../rubrail/type.ItemId.html" title="type rubrail::ItemId">ItemId</a>, idx: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>)</code></span></h3><div class='docblock'><p>Called when the given index in the scrubber is selected</p>
-
-<h1 id='arguments-3' class='section-header'><a href='#arguments-3'>Arguments</a></h1>
+<h1 id="arguments-3" class="section-header"><a href="#arguments-3">Arguments</a></h1>
 <ul>
 <li><code>item</code> - The <code>ItemId</code> of the interacting scrubber</li>
 <li><code>idx</code> - The index of the relevant item in the scrubber</li>
@@ -104,7 +109,7 @@ present its options.</p>
           Implementors<a href='#implementors' class='anchor'></a>
         </h2>
         <ul class='item-list' id='implementors-list'>
-    </ul><script type="text/javascript" async
+    </ul><script type="text/javascript">window.inlined_types=new Set([]);</script><script type="text/javascript" async
                          src="../implementors/rubrail/trait.TScrubberData.js">
                  </script></section>
     <section id='search' class="content hidden"></section>
@@ -119,18 +124,22 @@ present its options.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>↹</kbd></dt>
+                    <dd>Switch tab</dd>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 

@@ -10,8 +10,12 @@
     <title>touchbar.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css"
+          id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../../dark.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <script src="../../storage.js"></script>
     
 
     
@@ -28,10 +32,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
         
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -1487,8 +1499,8 @@
             <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">name</span>);
             <span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">extension</span>);
             <span class="kw">let</span> <span class="ident">ini</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">bundle</span>, <span class="ident">pathForResource</span>:<span class="ident">res</span> <span class="ident">ofType</span>:<span class="ident">ext</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">res</span>, <span class="ident">release</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">ext</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">res</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">ext</span>, <span class="ident">release</span>];
             <span class="kw">let</span> <span class="ident">cstr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">libc</span>::<span class="ident">c_char</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">ini</span>, <span class="ident">UTF8String</span>];
             <span class="kw">if</span> <span class="ident">cstr</span> <span class="op">!=</span> <span class="ident">ptr</span>::<span class="ident">null</span>() {
                 <span class="kw">let</span> <span class="ident">rstr</span> <span class="op">=</span> <span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">cstr</span>).<span class="ident">to_string_lossy</span>().<span class="ident">into_owned</span>();
@@ -1520,7 +1532,7 @@
         <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSColor&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">color</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[
             <span class="ident">cls</span>, <span class="ident">colorWithRed</span>: <span class="ident">r</span> <span class="ident">green</span>: <span class="ident">g</span> <span class="ident">blue</span>: <span class="ident">b</span> <span class="ident">alpha</span>: <span class="ident">alpha</span>];
-        <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setBackgroundColor</span>: <span class="ident">color</span>];
+        <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setBackgroundColor</span>: <span class="ident">color</span>];
     }
 
     <span class="doccomment">/// Sets the textColor attribute on an item&#39;s view.</span>
@@ -1544,7 +1556,7 @@
         <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSColor&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">color</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[
             <span class="ident">cls</span>, <span class="ident">colorWithRed</span>: <span class="ident">r</span> <span class="ident">green</span>: <span class="ident">g</span> <span class="ident">blue</span>: <span class="ident">b</span> <span class="ident">alpha</span>: <span class="ident">alpha</span>];
-        <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setTextColor</span>: <span class="ident">color</span>];
+        <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setTextColor</span>: <span class="ident">color</span>];
     }
 }
 
@@ -1639,7 +1651,7 @@
                 <span class="ident">UserTemplate</span>
             );
             <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>);
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">name</span>, <span class="ident">autorelease</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">name</span>, <span class="ident">autorelease</span>];
             <span class="ident">name</span>
         }
     }
@@ -1697,12 +1709,12 @@
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">obj</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">control</span> {
                 <span class="comment">// Sliders don&#39;t allocate their control</span>
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">_type</span> <span class="op">!=</span> <span class="ident">ItemType</span>::<span class="ident">Slider</span> {
-                    <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">obj</span>, <span class="ident">release</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">obj</span>, <span class="ident">release</span>];
                 }
             }
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">view</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">view</span>, <span class="ident">release</span>];
             <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ident</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">ident</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">ident</span>, <span class="ident">release</span>];
             <span class="self">self</span>.<span class="ident">view</span> <span class="op">=</span> <span class="ident">nil</span>;
             <span class="self">self</span>.<span class="ident">ident</span> <span class="op">=</span> <span class="number">0</span>;
             <span class="self">self</span>.<span class="ident">control</span> <span class="op">=</span> <span class="prelude-val">None</span>;
@@ -1767,16 +1779,16 @@
                                     <span class="ident">target</span>:<span class="ident">target</span>
                                     <span class="ident">action</span>:<span class="ident">sel</span>];
                 }
-                _ <span class="op">=&gt;</span> { <span class="kw">return</span> <span class="ident">nil</span> }
+                <span class="kw">_</span> <span class="op">=&gt;</span> { <span class="kw">return</span> <span class="ident">nil</span> }
             }
             <span class="kw">if</span> <span class="ident">text</span> <span class="op">!=</span> <span class="ident">nil</span> {
-                <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text</span>, <span class="ident">release</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text</span>, <span class="ident">release</span>];
             }
             <span class="kw">if</span> <span class="ident">image</span> <span class="op">!=</span> <span class="ident">nil</span> {
-                <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">image</span>, <span class="ident">release</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">image</span>, <span class="ident">release</span>];
             }
             <span class="comment">// These are auto-released, so they need an explicit retain</span>
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">retain</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">retain</span>];
             <span class="ident">btn</span>
         }
     }
@@ -1909,11 +1921,11 @@
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSFont&quot;</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">default_size</span>:<span class="ident">f64</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">systemFontSize</span>];
             <span class="kw">let</span> <span class="ident">custom_font</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">systemFontOfSize</span>: <span class="ident">default_size</span> <span class="op">-</span> <span class="number">3.0</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setFont</span>: <span class="ident">custom_font</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setFont</span>: <span class="ident">custom_font</span>];
 
             <span class="comment">//let anchor: *mut Object = msg_send![label, heightAnchor];</span>
             <span class="comment">//let constraint: *mut Object = msg_send![anchor, constraintEqualToConstant: 30. as f64];</span>
-            <span class="comment">//let _ = msg_send![constraint, setActive: YES];</span>
+            <span class="comment">//let _:() = msg_send![constraint, setActive: YES];</span>
         }
         <span class="kw">else</span> {
             <span class="comment">// Enlarge the font for single lines.  For some reason it defaults</span>
@@ -1921,7 +1933,7 @@
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSFont&quot;</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">default_size</span>:<span class="ident">f64</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">systemFontSize</span>];
             <span class="kw">let</span> <span class="ident">custom_font</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">systemFontOfSize</span>: <span class="ident">default_size</span> <span class="op">+</span> <span class="number">3.0</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setFont</span>: <span class="ident">custom_font</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setFont</span>: <span class="ident">custom_font</span>];
         }
     }
 }
@@ -1938,10 +1950,10 @@
         });
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">ptr</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">rust</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">RustTouchbarDelegateWrapper</span> <span class="kw">as</span> <span class="ident">u64</span>;
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">rust</span>.<span class="ident">objc</span>, <span class="ident">setRustWrapper</span>: <span class="ident">ptr</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">rust</span>.<span class="ident">objc</span>, <span class="ident">setRustWrapper</span>: <span class="ident">ptr</span>];
             <span class="kw">let</span> <span class="ident">objc_title</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">title</span>);
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">rust</span>.<span class="ident">objc</span>, <span class="ident">setTitle</span>: <span class="ident">objc_title</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_title</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">rust</span>.<span class="ident">objc</span>, <span class="ident">setTitle</span>: <span class="ident">objc_title</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_title</span>, <span class="ident">release</span>];
         }
         <span class="kw">return</span> <span class="ident">rust</span>
     }
@@ -1949,8 +1961,8 @@
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">image</span>);
             <span class="kw">let</span> <span class="ident">objc_image</span> <span class="op">=</span> <span class="ident">NSImage</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">initWithContentsOfFile_</span>(<span class="ident">filename</span>);
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">setIcon</span>: <span class="ident">objc_image</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">filename</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">setIcon</span>: <span class="ident">objc_image</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">filename</span>, <span class="ident">release</span>];
         }
     }
 
@@ -1961,7 +1973,7 @@
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">RRTouchBar</span>::<span class="ident">class</span>();
             <span class="kw">let</span> <span class="ident">bar</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
             <span class="kw">let</span> <span class="ident">bar</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">objc</span>::<span class="ident">runtime</span>::<span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">bar</span>, <span class="ident">init</span>];
-            <span class="kw">let</span> _ : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">bar</span>, <span class="ident">setDelegate</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
+            <span class="kw">let</span> <span class="kw">_</span> : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">bar</span>, <span class="ident">setDelegate</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalBar</span> {
                 <span class="ident">view</span>: <span class="ident">bar</span>,
                 <span class="ident">ident</span>: <span class="ident">ident</span>,
@@ -1984,12 +1996,12 @@
             <span class="kw">let</span> <span class="ident">btn</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">alloc_button</span>(<span class="ident">image</span>, <span class="ident">text</span>,
                                         <span class="ident">target</span>,
                                         <span class="macro">sel</span><span class="macro">!</span>(<span class="ident">popbar</span>:));
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setShowsCloseButton</span>: <span class="ident">YES</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setShowsCloseButton</span>: <span class="ident">YES</span>];
             <span class="kw">let</span> <span class="ident">gesture</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">makeStandardActivatePopoverGestureRecognizer</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">addGestureRecognizer</span>: <span class="ident">gesture</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setCollapsedRepresentation</span>: <span class="ident">btn</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setPopoverTouchBar</span>: <span class="ident">bar</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setPressAndHoldTouchBar</span>: <span class="ident">bar</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">addGestureRecognizer</span>: <span class="ident">gesture</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setCollapsedRepresentation</span>: <span class="ident">btn</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setPopoverTouchBar</span>: <span class="ident">bar</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setPressAndHoldTouchBar</span>: <span class="ident">bar</span>];
 
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalItem</span> {
                 <span class="ident">_type</span>: <span class="ident">ItemType</span>::<span class="ident">Popover</span>,
@@ -2015,13 +2027,13 @@
             <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">items</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ident</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">find_ident</span>(<span class="kw-2">&amp;</span><span class="ident">item</span>) {
                     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">ident</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
-                    <span class="kw">let</span> _ : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">idents</span>, <span class="ident">addObject</span>: <span class="ident">ident</span>];
+                    <span class="kw">let</span> <span class="kw">_</span> : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">idents</span>, <span class="ident">addObject</span>: <span class="ident">ident</span>];
                     <span class="self">self</span>.<span class="ident">bar_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">bar_id</span>).<span class="ident">unwrap</span>().<span class="ident">items</span>.<span class="ident">push</span>(<span class="ident">item</span>);
                 }
             }
             <span class="kw">let</span> <span class="ident">bar</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">bar_id</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
-            <span class="kw">let</span> _ : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">bar</span>, <span class="ident">setDefaultItemIdentifiers</span>: <span class="ident">idents</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">idents</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span> : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">bar</span>, <span class="ident">setDefaultItemIdentifiers</span>: <span class="ident">idents</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">idents</span>, <span class="ident">release</span>];
         }
     }
     <span class="kw">fn</span> <span class="ident">set_bar_as_root</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bar_id</span>: <span class="ident">BarId</span>) {
@@ -2034,10 +2046,10 @@
                 <span class="self">self</span>.<span class="ident">free_bar_allocations</span>(<span class="ident">old_bar</span>);
                 <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">old_bar</span>, <span class="ident">release</span>];
             }
-            <span class="kw">let</span> _ : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">setGroupTouchBar</span>: <span class="ident">bar_id</span>];
+            <span class="kw">let</span> <span class="kw">_</span> : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">setGroupTouchBar</span>: <span class="ident">bar_id</span>];
             <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">find_bar_ident</span>(<span class="kw-2">&amp;</span><span class="ident">bar_id</span>).<span class="ident">unwrap</span>();
-            <span class="kw">let</span> _ : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">setGroupIdent</span>: <span class="ident">ident</span>];
-            <span class="kw">let</span> _: () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">applicationDidFinishLaunching</span>: <span class="number">0</span>];
+            <span class="kw">let</span> <span class="kw">_</span> : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">setGroupIdent</span>: <span class="ident">ident</span>];
+            <span class="kw">let</span> <span class="kw">_</span> : () <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="self">self</span>.<span class="ident">objc</span>, <span class="ident">applicationDidFinishLaunching</span>: <span class="number">0</span>];
         }
     }
     <span class="kw">fn</span> <span class="ident">create_label</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">ItemId</span> {
@@ -2047,18 +2059,18 @@
             <span class="kw">let</span> <span class="ident">label</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
             <span class="kw">let</span> <span class="ident">label</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">initWithFrame</span>: <span class="ident">frame</span>];
             <span class="ident">RustTouchbarDelegateWrapper</span>::<span class="ident">set_label_font_for_text</span>(<span class="ident">label</span>, <span class="ident">text</span>);
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setEditable</span>: <span class="ident">NO</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setEditable</span>: <span class="ident">NO</span>];
             <span class="kw">let</span> <span class="ident">cell</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">cell</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cell</span>, <span class="ident">setWraps</span>: <span class="ident">NO</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cell</span>, <span class="ident">setWraps</span>: <span class="ident">NO</span>];
             <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">text</span>);
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setStringValue</span>: <span class="ident">text</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setStringValue</span>: <span class="ident">text</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text</span>, <span class="ident">release</span>];
 
             <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">generate_ident</span>();
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">RRCustomTouchBarItem</span>::<span class="ident">class</span>();
             <span class="kw">let</span> <span class="ident">item</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
             <span class="kw">let</span> <span class="ident">item</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">initWithIdentifier</span>: <span class="ident">ident</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>: <span class="ident">label</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>: <span class="ident">label</span>];
 
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalItem</span> {
                 <span class="ident">_type</span>: <span class="ident">ItemType</span>::<span class="ident">Label</span>,
@@ -2082,17 +2094,17 @@
             <span class="kw">let</span> <span class="ident">label</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">view</span>];
             <span class="ident">RustTouchbarDelegateWrapper</span>::<span class="ident">set_label_font_for_text</span>(<span class="ident">label</span>, <span class="ident">text</span>);
             <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">text</span>);
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setStringValue</span>: <span class="ident">text</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">setStringValue</span>: <span class="ident">text</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text</span>, <span class="ident">release</span>];
         }
     }
     <span class="kw">fn</span> <span class="ident">update_label_width</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">label_id</span>: <span class="kw-2">&amp;</span><span class="ident">ItemId</span>, <span class="ident">width</span>: <span class="ident">u32</span>) {
         <span class="kw">unsafe</span> {
-            <span class="comment">//let _ = msg_send![label, setAutoresizingMask: 0];</span>
-            <span class="comment">//let _ = msg_send![label, setFrameSize: NSSize::new(600., 10.)];</span>
-            <span class="comment">//let _ = msg_send![label, setBoundsSize: NSSize::new(600., 10.)];</span>
-            <span class="comment">//let _ = msg_send![item, setFrameSize: NSSize::new(600., 30.)];</span>
-            <span class="comment">//let _ = msg_send![label, setPreferredMaxLayoutWidth: 500.];</span>
+            <span class="comment">//let _:() = msg_send![label, setAutoresizingMask: 0];</span>
+            <span class="comment">//let _:() = msg_send![label, setFrameSize: NSSize::new(600., 10.)];</span>
+            <span class="comment">//let _:() = msg_send![label, setBoundsSize: NSSize::new(600., 10.)];</span>
+            <span class="comment">//let _:() = msg_send![item, setFrameSize: NSSize::new(600., 30.)];</span>
+            <span class="comment">//let _:() = msg_send![label, setPreferredMaxLayoutWidth: 500.];</span>
             <span class="comment">//let constraints: *mut Object = msg_send![label, constraints];</span>
             <span class="comment">//let count: u32 = msg_send![constraints, count];</span>
             <span class="comment">//info!(&quot;CONSTRAINTS: {}&quot;, count);</span>
@@ -2100,7 +2112,7 @@
             <span class="kw">let</span> <span class="ident">label</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">view</span>];
             <span class="kw">let</span> <span class="ident">anchor</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">label</span>, <span class="ident">widthAnchor</span>];
             <span class="kw">let</span> <span class="ident">constraint</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">anchor</span>, <span class="ident">constraintEqualToConstant</span>: <span class="ident">width</span> <span class="kw">as</span> <span class="ident">f64</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">constraint</span>, <span class="ident">setActive</span>: <span class="ident">YES</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">constraint</span>, <span class="ident">setActive</span>: <span class="ident">YES</span>];
         }
     }
 
@@ -2121,12 +2133,12 @@
             <span class="kw">let</span> <span class="ident">style</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">outlineOverlayStyle</span>];
 
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSScrubberTextItemView&quot;</span>).<span class="ident">unwrap</span>();
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">registerClass</span>: <span class="ident">cls</span> <span class="ident">forItemIdentifier</span>: <span class="ident">ident</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setDelegate</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setDataSource</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setSelectionOverlayStyle</span>: <span class="ident">style</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setMode</span>: <span class="number">1</span>]; <span class="comment">// NSScrubberModeFree</span>
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>: <span class="ident">scrubber</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">registerClass</span>: <span class="ident">cls</span> <span class="ident">forItemIdentifier</span>: <span class="ident">ident</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setDelegate</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setDataSource</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setSelectionOverlayStyle</span>: <span class="ident">style</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setMode</span>: <span class="number">1</span>]; <span class="comment">// NSScrubberModeFree</span>
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>: <span class="ident">scrubber</span>];
 
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalItem</span> {
                 <span class="ident">_type</span>: <span class="ident">ItemType</span>::<span class="ident">Scrubber</span>,
@@ -2148,7 +2160,7 @@
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">item</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">scrub_id</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
             <span class="kw">let</span> <span class="ident">scrubber</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">view</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setSelectedIndex</span>: <span class="ident">index</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setSelectedIndex</span>: <span class="ident">index</span>];
         }
     }
     <span class="kw">fn</span> <span class="ident">refresh_scrubber</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">scrub_id</span>: <span class="kw-2">&amp;</span><span class="ident">ItemId</span>) {
@@ -2157,11 +2169,11 @@
             <span class="kw">let</span> <span class="ident">scrubber</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">view</span>];
             <span class="kw">let</span> <span class="ident">sel_idx</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">selectedIndex</span>];
             <span class="kw">let</span> <span class="ident">pre_count</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">numberOfItems</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">reloadData</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">reloadData</span>];
             <span class="kw">let</span> <span class="ident">post_count</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">numberOfItems</span>];
             <span class="comment">// reload clears the selected item.  re-select it.</span>
             <span class="kw">if</span> <span class="ident">sel_idx</span> <span class="op">&gt;=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">pre_count</span> <span class="op">==</span> <span class="ident">post_count</span> {
-                <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setSelectedIndex</span>: <span class="ident">sel_idx</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">scrubber</span>, <span class="ident">setSelectedIndex</span>: <span class="ident">sel_idx</span>];
             }
         }
     }
@@ -2173,15 +2185,15 @@
             <span class="kw">if</span> <span class="ident">view</span> <span class="op">==</span> <span class="ident">nil</span> {
                 <span class="kw">return</span>;
             }
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSPanGestureRecognizer&quot;</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">gesture</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
             <span class="kw">let</span> <span class="ident">gesture</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>,
                                                  <span class="ident">initWithTarget</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()
                                                  <span class="ident">action</span>: <span class="macro">sel</span><span class="macro">!</span>(<span class="ident">swipeGesture</span>:)];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">addGestureRecognizer</span>: <span class="ident">gesture</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">addGestureRecognizer</span>: <span class="ident">gesture</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">release</span>];
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">internal_item</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">item_map</span>.<span class="ident">remove</span>(<span class="ident">item_id</span>).<span class="ident">unwrap</span>();
             <span class="ident">internal_item</span>.<span class="ident">swipe_cb</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cb</span>);
             <span class="self">self</span>.<span class="ident">item_map</span>.<span class="ident">insert</span>(<span class="kw-2">*</span><span class="ident">item_id</span>, <span class="ident">internal_item</span>);
@@ -2196,17 +2208,17 @@
             <span class="kw">if</span> <span class="ident">view</span> <span class="op">==</span> <span class="ident">nil</span> {
                 <span class="kw">return</span>;
             }
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSClickGestureRecognizer&quot;</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">gesture</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
             <span class="kw">let</span> <span class="ident">gesture</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>,
                                                  <span class="ident">initWithTarget</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()
                                                  <span class="ident">action</span>: <span class="macro">sel</span><span class="macro">!</span>(<span class="ident">tapGesture</span>:)];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setNumberOfTouchesRequired</span>: <span class="ident">fingers</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setNumberOfClicksRequired</span>: <span class="ident">taps</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">addGestureRecognizer</span>: <span class="ident">gesture</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setAllowedTouchTypes</span>: <span class="number">1</span>]; <span class="comment">// NSTouchTypeMaskDirect</span>
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setNumberOfTouchesRequired</span>: <span class="ident">fingers</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">setNumberOfClicksRequired</span>: <span class="ident">taps</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">addGestureRecognizer</span>: <span class="ident">gesture</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">gesture</span>, <span class="ident">release</span>];
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">internal_item</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">item_map</span>.<span class="ident">remove</span>(<span class="ident">item_id</span>).<span class="ident">unwrap</span>();
             <span class="ident">internal_item</span>.<span class="ident">tap_cb</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cb</span>);
             <span class="self">self</span>.<span class="ident">item_map</span>.<span class="ident">insert</span>(<span class="kw-2">*</span><span class="ident">item_id</span>, <span class="ident">internal_item</span>);
@@ -2229,7 +2241,7 @@
             <span class="comment">// And since it doesn&#39;t have an ident, just use it as its own ident.  Both</span>
             <span class="comment">// the view and ident will be sent a release at shutdown, so retain it an</span>
             <span class="comment">// extra time here to keep the references balanced.</span>
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">s</span>, <span class="ident">retain</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">s</span>, <span class="ident">retain</span>];
 
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalItem</span> {
                 <span class="ident">_type</span>: <span class="ident">ItemType</span>::<span class="ident">Spacer</span>,
@@ -2252,7 +2264,7 @@
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">path</span>);
             <span class="kw">let</span> <span class="ident">objc_image</span> <span class="op">=</span> <span class="ident">NSImage</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">initWithContentsOfFile_</span>(<span class="ident">filename</span>);
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">filename</span>, <span class="ident">release</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">filename</span>, <span class="ident">release</span>];
             <span class="ident">objc_image</span> <span class="kw">as</span> <span class="ident">TouchbarImage</span>
         }
     }
@@ -2261,7 +2273,7 @@
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSImage&quot;</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">image</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">imageNamed</span>: <span class="ident">ImageTemplate</span>::<span class="ident">objc</span>(<span class="ident">template</span>)];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">image</span>, <span class="ident">retain</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">image</span>, <span class="ident">retain</span>];
             <span class="ident">image</span> <span class="kw">as</span> <span class="ident">TouchbarImage</span>
         }
     }
@@ -2276,7 +2288,7 @@
             <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">RRCustomTouchBarItem</span>::<span class="ident">class</span>();
             <span class="kw">let</span> <span class="ident">item</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
             <span class="kw">let</span> <span class="ident">item</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">initWithIdentifier</span>: <span class="ident">ident</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>: <span class="ident">btn</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>: <span class="ident">btn</span>];
 
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalItem</span> {
                 <span class="ident">_type</span>: <span class="ident">ItemType</span>::<span class="ident">Button</span>,
@@ -2301,13 +2313,13 @@
             <span class="kw">let</span> <span class="ident">btn</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">view</span>];
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">image</span>) <span class="op">=</span> <span class="ident">image</span> {
                 <span class="kw">let</span> <span class="ident">image</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">image</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
-                <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">setImage</span>: <span class="ident">image</span>];
-                <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">image</span>, <span class="ident">release</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">setImage</span>: <span class="ident">image</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">image</span>, <span class="ident">release</span>];
             }
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">text</span>) <span class="op">=</span> <span class="ident">text</span> {
                 <span class="kw">let</span> <span class="ident">objc_text</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">text</span>);
-                <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">setTitle</span>: <span class="ident">objc_text</span>];
-                <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_text</span>, <span class="ident">release</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">btn</span>, <span class="ident">setTitle</span>: <span class="ident">objc_text</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_text</span>, <span class="ident">release</span>];
             }
         }
     }
@@ -2318,7 +2330,7 @@
             <span class="kw">let</span> <span class="ident">control</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">view</span>];
             <span class="kw">let</span> <span class="ident">anchor</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">control</span>, <span class="ident">widthAnchor</span>];
             <span class="kw">let</span> <span class="ident">constraint</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">anchor</span>, <span class="ident">constraintEqualToConstant</span>: <span class="ident">width</span> <span class="kw">as</span> <span class="ident">f64</span>];
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">constraint</span>, <span class="ident">setActive</span>: <span class="ident">YES</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">constraint</span>, <span class="ident">setActive</span>: <span class="ident">YES</span>];
         }
     }
 
@@ -2333,14 +2345,14 @@
             <span class="kw">let</span> <span class="ident">slider</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">slider</span>];
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">label</span>) <span class="op">=</span> <span class="ident">label</span> {
                 <span class="kw">let</span> <span class="ident">objc_text</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">label</span>);
-                <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setLabel</span>: <span class="ident">objc_text</span>];
-                <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_text</span>, <span class="ident">release</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setLabel</span>: <span class="ident">objc_text</span>];
+                <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_text</span>, <span class="ident">release</span>];
             }
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setMinValue</span>: <span class="ident">min</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setMaxValue</span>: <span class="ident">max</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setContinuous</span>: <span class="ident">continuous</span>];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setTarget</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
-            <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setAction</span>: <span class="macro">sel</span><span class="macro">!</span>(<span class="ident">slider</span>:)];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setMinValue</span>: <span class="ident">min</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setMaxValue</span>: <span class="ident">max</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setContinuous</span>: <span class="ident">continuous</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setTarget</span>: <span class="self">self</span>.<span class="ident">objc</span>.<span class="ident">clone</span>()];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setAction</span>: <span class="macro">sel</span><span class="macro">!</span>(<span class="ident">slider</span>:)];
 
             <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">InternalItem</span> {
                 <span class="ident">_type</span>: <span class="ident">ItemType</span>::<span class="ident">Slider</span>,
@@ -2362,7 +2374,7 @@
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">item</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">id</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
             <span class="kw">let</span> <span class="ident">slider</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">slider</span>];
-            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setDoubleValue</span>: <span class="ident">value</span>];
+            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">slider</span>, <span class="ident">setDoubleValue</span>: <span class="ident">value</span>];
         }
     }
 }
@@ -2440,8 +2452,8 @@
                             <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">cbs</span>.<span class="ident">text</span>(<span class="kw-2">*</span><span class="ident">item</span>, <span class="ident">idx</span>);
                             <span class="kw">let</span> <span class="ident">text_field</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">view</span>, <span class="ident">textField</span>];
                             <span class="kw">let</span> <span class="ident">objc_text</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="ident">NSString</span>::<span class="ident">alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>);
-                            <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text_field</span>, <span class="ident">setStringValue</span>: <span class="ident">objc_text</span>];
-                            <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_text</span>, <span class="ident">release</span>];
+                            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">text_field</span>, <span class="ident">setStringValue</span>: <span class="ident">objc_text</span>];
+                            <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">objc_text</span>, <span class="ident">release</span>];
                             <span class="kw">return</span> <span class="ident">view</span> <span class="kw">as</span> <span class="ident">u64</span>;
                         }
                     }
@@ -2491,11 +2503,11 @@
                     <span class="comment">// using the popover&#39;s built-in showPopover because that pops</span>
                     <span class="comment">// _under_ a system function bar.</span>
                     <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSTouchBar&quot;</span>).<span class="ident">unwrap</span>();
-                    <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>,
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>,
                               <span class="ident">presentSystemModalFunctionBar</span>: <span class="ident">bar</span>
                               <span class="ident">systemTrayItemIdentifier</span>: <span class="ident">ident</span>];
                     <span class="kw">let</span> <span class="ident">app</span> <span class="op">=</span> <span class="ident">NSApp</span>();
-                    <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">app</span>, <span class="ident">setTouchBar</span>: <span class="ident">nil</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">app</span>, <span class="ident">setTouchBar</span>: <span class="ident">nil</span>];
                 }
             }
             <span class="kw">extern</span> <span class="kw">fn</span> <span class="ident">objc_button</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Object</span>, <span class="ident">_cmd</span>: <span class="ident">Sel</span>, <span class="ident">sender</span>: <span class="ident">u64</span>) {
@@ -2543,7 +2555,7 @@
                         <span class="comment">// NSGestureRecognizerStateFailed</span>
                         <span class="number">5</span> <span class="op">=&gt;</span> <span class="ident">SwipeState</span>::<span class="ident">Failed</span>,
                         <span class="comment">// NSGestureRecognizerStatePossible,</span>
-                        _ <span class="op">=&gt;</span> <span class="ident">SwipeState</span>::<span class="ident">Unknown</span>,
+                        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">SwipeState</span>::<span class="ident">Unknown</span>,
                     };
                     <span class="kw">if</span> <span class="ident">state</span> <span class="op">!=</span> <span class="ident">SwipeState</span>::<span class="ident">Unknown</span> {
                         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">cb</span>) <span class="op">=</span> <span class="ident">wrapper</span>.<span class="ident">find_swipe_cb</span>(<span class="ident">view</span> <span class="kw">as</span> <span class="ident">u64</span>) {
@@ -2573,9 +2585,9 @@
                     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">ident_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
                     <span class="kw">let</span> <span class="ident">bar</span> <span class="op">=</span> <span class="ident">bar_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
                     <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSTouchBar&quot;</span>).<span class="ident">unwrap</span>();
-                    <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>,
-                              <span class="ident">presentSystemModalFunctionBar</span>: <span class="ident">bar</span>
-                              <span class="ident">systemTrayItemIdentifier</span>: <span class="ident">ident</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>,
+                                         <span class="ident">presentSystemModalFunctionBar</span>: <span class="ident">bar</span>
+                                         <span class="ident">systemTrayItemIdentifier</span>: <span class="ident">ident</span>];
                 }
             }
             <span class="kw">extern</span> <span class="kw">fn</span> <span class="ident">objc_touch_bar_make_item_for_identifier</span>(<span class="ident">this</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Object</span>, <span class="ident">_cmd</span>: <span class="ident">Sel</span>,
@@ -2600,18 +2612,18 @@
                     <span class="kw">let</span> <span class="ident">old_item</span> <span class="op">=</span> <span class="ident">old_item_ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
                     <span class="kw">if</span> <span class="ident">old_item</span> <span class="op">!=</span> <span class="ident">nil</span> {
                         <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSTouchBarItem&quot;</span>).<span class="ident">unwrap</span>();
-                        <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">removeSystemTrayItem</span>: <span class="ident">old_item</span>];
-                        <span class="kw">let</span> _ <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">old_item</span>, <span class="ident">release</span>];
+                        <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">removeSystemTrayItem</span>: <span class="ident">old_item</span>];
+                        <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">old_item</span>, <span class="ident">release</span>];
                     }
 
                     <span class="kw">let</span> <span class="ident">app</span> <span class="op">=</span> <span class="ident">NSApp</span>();
-                    <span class="kw">let</span> _:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">app</span>, <span class="ident">setTouchBar</span>: <span class="ident">nil</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">app</span>, <span class="ident">setTouchBar</span>: <span class="ident">nil</span>];
 
                     <span class="kw">let</span> <span class="ident">ident_int</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">this</span>.<span class="ident">get_ivar</span>(<span class="string">&quot;_group_id&quot;</span>);
                     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">ident_int</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span>;
                     <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSCustomTouchBarItem&quot;</span>).<span class="ident">unwrap</span>();
                     <span class="kw">let</span> <span class="ident">item</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Object</span> <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">alloc</span>];
-                    <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">initWithIdentifier</span>:<span class="ident">ident</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">initWithIdentifier</span>:<span class="ident">ident</span>];
                     <span class="ident">this</span>.<span class="ident">set_ivar</span>(<span class="string">&quot;_tray_item&quot;</span>, <span class="ident">item</span> <span class="kw">as</span> <span class="ident">u64</span>);
 
                     <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSButton&quot;</span>).<span class="ident">unwrap</span>();
@@ -2630,10 +2642,10 @@
                                         <span class="ident">target</span>:<span class="ident">this</span>
                                         <span class="ident">action</span>:<span class="macro">sel</span><span class="macro">!</span>(<span class="ident">present</span>:)];
                     }
-                    <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>:<span class="ident">btn</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">item</span>, <span class="ident">setView</span>:<span class="ident">btn</span>];
 
                     <span class="kw">let</span> <span class="ident">cls</span> <span class="op">=</span> <span class="ident">Class</span>::<span class="ident">get</span>(<span class="string">&quot;NSTouchBarItem&quot;</span>).<span class="ident">unwrap</span>();
-                    <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">addSystemTrayItem</span>: <span class="ident">item</span>];
+                    <span class="kw">let</span> <span class="kw">_</span>:() <span class="op">=</span> <span class="macro">msg_send</span><span class="macro">!</span>[<span class="ident">cls</span>, <span class="ident">addSystemTrayItem</span>: <span class="ident">item</span>];
                     <span class="ident">DFRElementSetControlStripPresenceForIdentifier</span>(<span class="ident">ident</span>, <span class="ident">YES</span>);
                 }
             }
@@ -2712,18 +2724,22 @@
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>↹</kbd></dt>
+                    <dd>Switch tab</dd>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 
